@@ -1,0 +1,151 @@
+@import "../common"
+
+//.auth-panel
+//  position: fixed
+//  width: 100%
+//  height: 100%
+//  top: 0
+//  z-index: 10
+
+.auth-buttons button
+  @include main-button($backHover: seagreen)
+
+.auth-panel::before
+  content: " "
+  width: 100%
+  height: 100%
+  display: block
+  top: 0
+  background: black
+  opacity: 0.5
+  z-index: 8
+  position: fixed
+  left: 0
+
+.auth-dialog
+  width: 20rem
+  position: fixed
+  top: 40%
+  transform: translateX(-50%) translateY(-50%)
+  left: 50%
+  background: white
+  z-index: 10
+  overflow: auto
+
+  @media all and (max-height: 34rem) and (min-width: 21rem)
+    transform: translateX(-50%)
+    top: 0
+
+  @media all and (max-width: 21rem) and (min-height: 34rem)
+    transform: translateY(-50%)
+    left: 0
+    width: 100%
+
+  @media all and (max-height: 34rem) and (max-width: 21rem)
+    top: 0
+    transform: none
+    left: 0
+    width: 100%
+
+
+  button
+    display: block
+    margin: 0.5rem auto 1rem
+    @include main-button()
+
+  button:hover
+    opacity: 1
+
+.auth-dialog-head
+  position: relative
+
+.auth-dialog-heading
+  text-align: center
+  margin: 0
+  padding: 1.1rem 0 1rem
+  font-weight: normal
+
+.btn.close
+  width: 2.5rem
+  right: 0.5rem
+  top: 0.5rem
+  position: absolute
+
+fieldset
+  padding: 0.5rem 3rem 1rem 3rem
+
+label
+  display: block
+
+.req-star
+  color: rgb(156, 47, 47)
+  font-size: 0.8em
+  vertical-align: super
+  margin-left: 0.1em
+
+input
+  width: 100%
+  vertical-align: middle
+  display: inline-block
+  border: none
+  border-bottom: 1px solid #212121
+  font-size: 0.95em
+
+.username-holder
+  color: var(--header-color)
+  margin-right: 0.5rem
+
+.error
+  color: darkred
+  margin: 0 2rem 0.7rem
+  font-size: 0.9rem
+  padding-left: 0.8rem
+  border-left: 0.5rem solid
+  opacity: 0
+  transition: opacity 0.3s
+
+.error.visible
+  opacity: 1
+  transition: opacity 0.4s
+
+
+.social-register, .social-login
+  //text-align: center
+  margin-bottom: 0.5rem
+  margin-left: 3rem
+
+.social-register > *, .social-login > *
+  vertical-align: middle
+
+.social-register > .btn, .social-login > .btn
+  margin-left: 0.2rem
+
+.social-login
+  margin-top: 0.5rem
+
+.disjunctor
+  text-align: center
+  text-transform: uppercase
+  font-size: .85em
+  letter-spacing: .5em
+  color: #0d7757
+  font-weight: 600
+  margin: 1rem 0 0.4rem
+
+.loginState .disjunctor
+  margin: 1.5rem 0 1rem
+
+.line
+  display: inline-block
+  vertical-align: middle
+  border: 0 dashed #9bb3dd
+  border-top-width: 2px
+  margin-top: -3px
+  width: 6rem
+  max-width: 45%
+
+.social-register-head, label
+  text-transform: uppercase
+  font-size: .85em
+  color: #2f4f4f
+  font-weight: 400

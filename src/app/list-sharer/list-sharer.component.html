@@ -1,0 +1,54 @@
+<div class="component-wrap" [class.visible]="visible">
+  <div class="share-dialog"  *ngIf="_list">
+    <h3 class="head"> Share {{ _list.name }} </h3>
+    <div class="share-list">
+      <div class="share" *ngFor="let share of shares">
+        <span class="user">{{ share.username }}</span>
+        <img (click)="onRemoveShare(share.username)" class="remove-share btn" title="Stop Sharing"
+                                                           src="https://maxcdn.icons8.com/office/PNG/40/Users/remove_user_male-40.png">
+        <span class="roles">
+          <span *ngFor="let role of ['admin', 'edit', 'check', 'read']" class="role-wrap">
+            <span *ngIf="role == share.role" class="role selected">{{ role }}</span>
+            <span *ngIf="role != share.role" (click)="onEditShare(share.username, role)" class="role btn">{{ role }}</span>
+          </span>
+        </span>
+      </div>
+
+      <div class="public-share">
+        <label class="public-share-head">Everyone else</label>
+        <!--<img (click)="onEditPublicShare(null)" class="remove-share btn" title="Stop Sharing"-->
+                                                                   <!--src="https://maxcdn.icons8.com/office/PNG/40/Users/remove_user_male-40.png">-->
+        <span class="roles">
+          <span *ngFor="let role of ['edit', 'check', 'read', null]" class="role-wrap">
+            <span *ngIf="role == publicShare" class="role selected">{{ role ? role : 'no' }}</span>
+            <span *ngIf="role != publicShare" (click)="onEditPublicShare(role)" class="role btn">{{ role ? role : 'no' }}</span>
+          </span>
+        </span>
+      </div>
+
+
+      <div class="newShare">
+        <label class="newShareLabel">Share With: </label>
+        <input auto-complete [source]="listShareHistory" [no-match-found-text]="''"
+               [(ngModel)]="newShare" (keyup.enter)="onAddShare(newShare, 'read');newShare='';" class="newShareInput" placeholder="username"/>
+        <span class="share-button" (click)="onAddShare(newShare, 'read');newShare='';">Share</span>
+      </div>
+    </div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+    <div class="action-wrap">
+      <button (click)="onClose()" class="close">Close</button>
+    </div>
+  </div>
+  <div class="confirm-dialog-wrap" [class.visible]="setMyRole">
+    <div class="confirm-dialog">
+      <div class="question">
+        <span class="question-inner">Are you sure you want to remove yourself from admin?<br/>
+        You will not be able to revert it later.</span>
+      </div>
+      <div class="action-wrap">
+        <button (click)="cancelFromAdmin()" class="no">No</button>
+        <button (click)="removeFromAdmin()" class="yes">Yes, do it</button>
+      </div>
+    </div>
+  </div>
+</div>

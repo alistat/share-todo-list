@@ -1,0 +1,82 @@
+<div class="select-list-wrap" [class.on-side]="onSide">
+  <div class="selection-panel-selector">
+    <button (click)="selectionPanel=SelectionPanel.PUBLIC" [class.selected]="selectionPanel==SelectionPanel.PUBLIC" onfocus="this.blur()">Public Lists</button><button (click)="selectionPanel=SelectionPanel.PRIVATE" [class.selected]="selectionPanel==SelectionPanel.PRIVATE" onfocus="this.blur()">Private Lists</button>
+  </div>
+  <div *ngIf="selectionPanel == SelectionPanel.PUBLIC" class="select-public-list">
+    <div class="select-public-list-fields">
+      <div class="select-list-field-wrap">
+        <div class="select-list-field">
+          <input type="text" title="Type to select list" class="select-list-input" placeholder="list name…" autofocus [(ngModel)]="typedListName" (keyup.enter)="onListSelected()">
+
+        </div>
+        <div class="select-list-field">
+          <input type="password" title="List password" class="select-list-input password" placeholder="list password (if any)…" [(ngModel)]="typedListPassword" (keyup.enter)="onListSelected()">
+
+        </div>
+      </div>
+      <button *ngIf="typedListName" class="open-create" (click)="onListSelected()" onclick="this.blur()">OPEN<br/>or<br/>CREATE</button>
+      <button *ngIf="!typedListName"  class="open-create" disabled>OPEN<br/>or<br/>CREATE</button>
+    </div>
+    <div *ngIf="!user" class="noUser">
+      <img title="Info" style="width:1.5em;height:1.5em;vertical-align:middle" src="https://maxcdn.icons8.com/dotty/PNG/80/Very_Basic/info-80.png">
+      To create or open a list write the name in the field above :)
+      <div style="height: 0.5em"></div>
+      <app-c-dialog-button  [name]="'about-public-lists'" [buttonStyle]="'padding: 0.4em 0.8em;border: 1px solid lightgray;'">
+        <span style="vertical-align:middle;">About Public Lists</span>
+        <img src="https://maxcdn.icons8.com/office/PNG/30/User_Interface/help-30.png" title="Help" style="vertical-align: middle;width: 1.3em;height: 1.3em;margin-left: 0.1rem;">
+      </app-c-dialog-button>
+    </div>
+    <div class="history-wrap" *ngIf="user">
+      <h4 class="history-head">History</h4>
+      <div class="lists-wrap" *ngIf="history.length > 0">
+        <div *ngFor="let list of history" (click)="onHistoryClicked(list)" class="myList">
+          <span class="my-lists-name">{{ list.name }}</span>
+          <span class="btn history-remove" title="Remove from history" (click)="onHistoryDelete(list); $event.stopPropagation();">✘</span>
+          <span class="my-lists-type">{{ list.type==ListType.OPEN ? 'open' : 'secret' }}</span>
+        </div>
+      </div>
+      <div *ngIf="!history || history.length==0" class="noHistory">
+        <img title="Info" style="width:1.5em;height:1.5em;vertical-align:middle" src="https://maxcdn.icons8.com/dotty/PNG/80/Very_Basic/info-80.png">
+        You haven't opened any public lists recently
+      </div>
+    </div>
+  </div>
+  <div *ngIf="selectionPanel == SelectionPanel.PRIVATE" class="select-private-list">
+    <div class="select-private-list-fields">
+      <div class="select-list-field-wrap">
+        <div class="select-list-field">
+          <input auto-complete [source]="userlists" [no-match-found-text]="''"
+                 type="text" title="Private List" class="select-list-input" placeholder="    Select List"
+                 [(ngModel)]="_typedPrivateList" (keyup.enter)="onListSelected()" (keyup)="onPrivateListType()"
+                 [list-formatter]="formatMyList" [value-formatter]="formatMyListValue">
+        </div>
+      </div>
+      <button *ngIf="!shouldDisableOpenPrivate()" class="open-create" (click)="onListSelected()" onclick="this.blur()">{{
+        isNewList() ? 'CREATE' : 'OPEN' }}</button>
+      <button *ngIf="shouldDisableOpenPrivate()" class="open-create" disabled>{{ 'CREATE' }}</button>
+    </div>
+    <div *ngIf="!user" class="noUser">
+      <img title="Info" style="width:1.5em;height:1.5em;vertical-align:middle" src="https://maxcdn.icons8.com/dotty/PNG/80/Very_Basic/info-80.png">
+      You have to be logged in to create a private list
+      <div style="height: 0.5em"></div>
+      <app-c-dialog-button  [name]="'about-private-lists'" [buttonStyle]="'padding: 0.4em 0.8em;border: 1px solid lightgray;'">
+        <span style="vertical-align:middle;">About Private Lists</span>
+        <img src="https://maxcdn.icons8.com/office/PNG/30/User_Interface/help-30.png" title="Help" style="vertical-align: middle;width: 1.3em;height: 1.3em;margin-left: 0.1rem;">
+      </app-c-dialog-button>
+    </div>
+    <div class="my-lists" *ngIf="user">
+      <h4 class="my-lists-head">My Lists</h4>
+      <div class="lists-wrap" *ngIf="userlists.length > 0">
+        <div *ngFor="let list of userlists" (click)="onMyListClicked(list)" class="myList">
+          <span class="my-lists-owner" *ngIf="list.owner != user.username">{{ list.owner }}</span><span class="my-lists-name">{{ list.name }}</span>
+          <span class="my-lists-role">{{ list.role }}</span>
+        </div>
+      </div>
+      <div *ngIf="!userlists || userlists.length==0" class="noMyLists">
+        <img title="Info" style="width:1.5em;height:1.5em;vertical-align:middle" src="https://maxcdn.icons8.com/dotty/PNG/80/Very_Basic/info-80.png">
+        <strong >Tip:</strong> Write the name of your list in the field above and click "Create" :)
+      </div>
+    </div>
+
+  </div>
+</div>

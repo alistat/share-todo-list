@@ -1,0 +1,77 @@
+<!--<div class="ad"  [class.hidden]="adHidden">-->
+  <!--<div id="contentad370231"></div>-->
+  <!--<a href="javascript:void(0)" class="hideAd" (click)="onHideAd()">Hide Ads</a>-->
+<!--</div>-->
+
+
+<app-account-action></app-account-action>
+<app-todo-list-selector (onListSelected)="onListSelected($event)"></app-todo-list-selector>
+
+<!--<div class="ad shower" *ngIf="adHidden">-->
+  <!--<a href="javascript:void(0)" class="showAd" (click)="onShowAd()">Show Ads<br/>You never know...</a>-->
+<!--</div>-->
+
+<app-todo-list [todoList]="selectedList"></app-todo-list>
+
+
+<app-text-dialog [name]="'central'"></app-text-dialog>
+
+<app-text-dialog [name]="'about'">
+  <span data-head>
+    About
+  </span>
+  <section data-content>
+    <div style="text-align: center">
+      Manage your todo lists and share them with your friends and colleagues!<br><br>
+      Contact al<span style="display: none">la</span>istat @ vivaldi . net <br><br>
+      Copyright 2017, Stathis Aliprandis, all rights reserved <br><br>
+      <a href="https://github.com/alistat/share-todo-list" target="_blank">Source Code</a>
+      <a href="https://alistat.eu/webapp/share-todo-list" target="_blank">More Info</a>
+    </div>
+    <div *ngIf="theme && theme.description" style="text-align: center">
+      <h3 style="color: #735b7e;margin: 1.5rem 0 1rem;">About Theme "{{ theme.name }}"</h3>
+      <section>
+        {{ theme.description }}
+      </section>
+    </div>
+  </section>
+</app-text-dialog>
+
+<app-text-dialog [name]="'requirements'">
+  <span data-head>
+    Requirements
+  </span>
+  <section data-content>
+    <div style="text-align: center">
+      This app requires a modern browser. If you are running Internet Explorer consider upgrading to Edge. <br><br>
+      The app does not work well on small screens yet. Mobile support is a work in progress.
+    </div>
+  </section>
+</app-text-dialog>
+
+<app-text-dialog [name]="'about-public-lists'">
+  <span data-head>
+    Public Lists
+  </span>
+  <section data-content>
+    <div style="text-align: center">
+      Anyone can open a public list as long he knows the list's name (and password). <br/><br/>
+      Note that there may be multiple public lists with the same name as long as they have different passwords.
+    </div>
+  </section>
+</app-text-dialog>
+
+
+<app-text-dialog [name]="'about-private-lists'">
+  <span data-head>
+    Private Lists
+  </span>
+  <section data-content>
+    <div style="text-align: center">
+      If you have an account you can create your own private lists.<br/><br/>
+      Only you and the people you choose to share with will be able to view and edit your private lists.<br/><br/>
+      You may, however, choose to share a list with everyone, even with people who don't have an account.
+      In that case, just send them the list's link.
+    </div>
+  </section>
+</app-text-dialog>

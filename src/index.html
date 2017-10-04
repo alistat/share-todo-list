@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Share Todo List Online</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link rel="canonical" href="https://sharetodolist.eu">
+  <meta property="og:url" content="https://sharetodolist.eu" />
+  <meta property="og:title" content="Share Your Todo List" />
+  <meta property="og:description" content="Manage your todo lists and share them with your friends and colleagues!" />
+  <meta name="description" content="Manage your todo lists and share them online with your friends and colleagues!" />
+  <meta property="og:image" content="https://sharetodolist.eu/assets/screenshot.png" />
+</head>
+<body>
+<header>
+  <app-theme-selector></app-theme-selector>
+  <h1><a href="/">
+    <span  class="optional">SHARE MY</span> TODO <span class="optional2">LIST</span>
+  </a>
+  </h1>
+  <app-auth></app-auth>
+</header>
+  <app-root>
+    <app-text-dialog [name]="'about'">
+  <span data-head>
+    About
+  </span>
+      <section data-content>
+        <div style="text-align: center">
+          Manage your todo lists and share them with your friends and colleagues!<br><br>
+          Contact al<span style="display: none">la</span>istat @ vivaldi . net <br><br>
+          Copyright 2017, Stathis Aliprandis, all rights reserved <br><br>
+          <a href="https://github.com/alistat/share-todo-list" target="_blank">Source Code</a>
+          <a href="https://alistat.eu/webapp/share-todo-list" target="_blank">More Info</a>
+        </div>
+        <div *ngIf="theme && theme.description" style="text-align: center">
+          <h3 style="color: #735b7e;margin: 1.5rem 0 1rem;">About Theme "{{ theme.name }}"</h3>
+          <section>
+            {{ theme.description }}
+          </section>
+        </div>
+      </section>
+    </app-text-dialog>
+
+    <app-text-dialog [name]="'requirements'">
+  <span data-head>
+    Requirements
+  </span>
+      <section data-content>
+        <div style="text-align: center">
+          This app requires a modern browser. If you are running Internet Explorer consider upgrading to Edge. <br><br>
+          The app does not work well on small screens yet. Mobile support is a work in progress.
+        </div>
+      </section>
+    </app-text-dialog>
+
+    <app-text-dialog [name]="'about-public-lists'">
+  <span data-head>
+    Public Lists
+  </span>
+      <section data-content>
+        <div style="text-align: center">
+          Anyone can open a public list as long he knows the list's name (and password). <br/><br/>
+          Note that there may be multiple public lists with the same name as long as they have different passwords.
+        </div>
+      </section>
+    </app-text-dialog>
+
+
+    <app-text-dialog [name]="'about-private-lists'">
+  <span data-head>
+    Private Lists
+  </span>
+      <section data-content>
+        <div style="text-align: center">
+          If you have an account you can create your own private lists.<br/><br/>
+          Only you and the people you choose to share with will be able to view and edit your private lists.<br/><br/>
+          You may, however, choose to share a list with everyone, even with people who don't have an account.
+          In that case, just send them the list's link.
+        </div>
+      </section>
+    </app-text-dialog>
+
+  </app-root>
+<!--
+  <div style="text-align: center;display: none">
+    <a href="https://www.vultr.com/?ref=7148874"><img src="https://www.vultr.com/media/banner_2.png" width="468" height="60"></a>
+  </div>
+-->
+  <div class="footer">
+    <app-footer-menu></app-footer-menu>
+    <div style="display: inline-block; vertical-align: middle;" class="fb-like" data-href="https://www.facebook.com/sharetodo/" data-layout="button_count"
+         data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
+    <div class="g_plus_fix">
+      <div style="display: inline-block; vertical-align: middle;"  class="g-plusone" data-size="medium" data-href="https://sharetodolist.eu"></div>
+    </div>
+
+    <span class="icons-credit"><a href="https://icons8.com" target="_blank">Icon pack by Icons8</a></span>
+  </div>
+
+<script src="assets/scripts/services-config.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConnection);
+</script>
+<script type="text/javascript">
+
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha512/0.3.0/sha512.js"></script>
+<script>
+  if (window.externalServices.googleAnalytics) {
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-100366147-1', 'auto');
+    ga('send', 'pageview');
+  }
+
+</script>
+<link rel="stylesheet" href="assets/styles/dragula.min.css">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.9&appId=1518201264866243";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'en-GB'}
+</script>
+
+</body>
+</html>

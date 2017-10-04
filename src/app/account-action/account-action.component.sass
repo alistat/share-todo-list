@@ -1,0 +1,122 @@
+@import "../common"
+
+.must-verify, .verify-success
+  margin: 0 auto 2.5rem
+  max-width: 20rem
+  text-align: center
+  font-size: 1.3rem
+
+.must-verify
+  color: darkred
+
+.verify-success
+  background: rgba(16, 87, 24, 0.65)
+  color: white
+  padding: 0.5em 0.8em
+  border-radius: 0.7em
+  cursor: pointer
+
+.resend:hover
+  background: rgba(255, 255, 255, 0.8)
+  color: #6c1a1a
+
+.resend
+  margin-top: 0.5rem
+  cursor: pointer
+  display: inline-block
+  background: rgba(255, 255, 255, 0.6)
+  padding: 0.3em 0.5em
+  border-radius: 0.3em
+  color: #891616
+  font-size: 1rem
+
+
+
+.action-wrap
+  text-align: center
+  padding: 1rem
+
+.confirm-dialog-wrap::before
+  @include overlay(15, black)
+  opacity: 0.3
+
+.confirm-dialog
+  position: fixed
+  z-index: 20
+  background: white
+  padding: 1.5rem 2rem 1rem
+  top: 40%
+  left: 50%
+  transform: translateX(-50%) translateY(-50%)
+  border: 1px solid dimgray
+  border-radius: 0.8rem
+  font-size: 1.1rem
+  width: 25rem
+  max-width: calc(100% - 4.5rem)
+
+  .question
+    text-align: center
+
+  .username-select
+    margin: 1rem 0 0 0
+    padding: 0.5rem 0
+    text-align: center
+
+  label
+    text-transform: uppercase
+    font-size: 0.9rem
+    color: #2f4f4f
+    font-weight: 400
+    vertical-align: middle
+    display: block
+
+  input
+    max-width: 20em
+    vertical-align: middle
+    display: inline-block
+    border: none
+    border-bottom: 1px solid #212121
+    font-size: 1em
+    margin-top: 0.2em
+    text-align: center
+
+  .action-wrap
+    padding: 1.5rem 0 0
+
+  button.no
+    background: #788186
+
+  button.yes
+    background: #008CBA
+
+  button:first-child
+    margin-right: 0.5rem
+
+  button
+    font-size: 1rem
+    border-radius: 0.1rem
+    border: none
+    padding: 0.3em 0.6em
+    color: white
+    margin-bottom: 0.5rem
+
+  button:hover
+    opacity: 0.9
+
+  .error
+    color: darkred
+    font-size: 0.9rem
+    padding-left: 0.8rem
+    opacity: 0
+    transition: opacity 0.3s
+    margin: 0.5rem auto 0
+    max-width: 25em
+    display: block
+    min-height: 1em
+
+  .error.visible
+    opacity: 1
+    transition: opacity 0.4s
+
+
+

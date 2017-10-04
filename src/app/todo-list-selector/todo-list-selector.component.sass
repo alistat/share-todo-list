@@ -1,0 +1,215 @@
+@import "../common"
+
+.select-list-wrap input
+  background: transparent
+
+.select-list-wrap
+  //min-height: 20rem
+  border: #546E7A 2px solid
+  overflow: hidden
+  border-radius: 2rem 2rem 0.5rem 0.5rem
+  background-color: var(--main-background)
+  margin-left: calc(50% - 15rem)
+  margin-bottom: 1.5rem
+  max-width: 30rem
+
+  @media all and (max-width: 32rem)
+    margin-left: 0.5rem
+    margin-right: 0.5rem
+
+
+.select-list-wrap.on-side
+  max-width: 21rem
+  float: left
+  margin-left: 5%
+  margin-right: 0.5rem
+  margin-top: 2rem
+  transition: max-width 0.6s, margin-left 0.6s, margin-top 0.6s, transform 0.6s
+
+  @media all and (max-width: 80rem)
+    margin-left: 0.5rem
+
+  @media all and (max-width: 60rem)
+    float: none
+    max-width: 30rem
+    margin: 0 0 2rem calc(50% - 15rem)
+
+  @media all and (max-width: 32rem)
+    margin-left: 0.5rem
+    margin-right: 0.5rem
+
+
+
+
+.selection-panel-selector
+  margin-bottom: 1rem
+
+.selection-panel-selector button
+  background: lightgrey
+  color: gray
+  display: inline-block
+  width: 50%
+  border: none
+  border-bottom: 2px solid #c6c6c6
+  padding: 0.3em
+  font-size: 1.1rem
+
+.selection-panel-selector button:first-child
+  border-right: 2px solid #c6c6c6
+  border-bottom-right-radius: 1em
+
+.selection-panel-selector button:last-child
+  border-left: 2px solid #c6c6c6
+  border-bottom-left-radius: 1em
+
+.selection-panel-selector button.selected
+  background: transparent
+  border-bottom: none
+  border-right: none
+  border-left: none
+  color: #754c60
+  font-weight: bold
+
+.select-public-list-fields, .select-private-list-fields
+  padding: 3% 3% 3% 4%
+  display: flex
+  flex-direction: row
+
+.select-list-field-wrap
+  flex: auto
+
+.select-list-field
+  position: relative
+  border-bottom: 2px solid #B0BEC5
+  padding: 0.4rem 0 0.45rem
+
+.select-list-field > *
+  vertical-align: middle
+
+.select-list-input
+  border: none
+  font-size: 1.4rem
+  width: 100%
+  text-align: center
+  color: #404C6F
+
+.list-select-controls
+  display: inline-block
+  position: absolute
+  right: 0.4rem
+  top: 0.2rem
+
+
+.list-select-controls > *
+  vertical-align: middle
+
+.list-select-cancel
+  width: 2rem
+
+.list-select
+  width: 2.5rem
+
+.open-create
+  border: none
+  border-radius: 0.6rem
+  text-align: center
+  margin-top: 0.6rem
+  background: #4b7d58
+  color: white
+  cursor: pointer
+  margin-left: 4%
+  min-width: 5em
+  transition: background 0.5s
+
+.on-side .open-create
+  background: #848d86
+
+.on-side:hover .open-create
+  background: #4b7d58
+
+.open-create:hover
+  background: #2a926d !important
+  transition: all 0.5s
+
+.open-create[disabled], .open-create[disabled]:hover
+  cursor: default
+  background: #848d86 !important
+
+.two-button-wrap button
+  display: inline-block
+  width: 50%
+  border: none
+  background: transparent
+  padding: 0.8em
+  cursor: pointer
+  text-transform: uppercase
+  font-weight: bold
+  color: #6e5675
+
+.two-button-wrap button:hover
+  background: rgba(255, 255, 255, 0.3)
+  color: #061180
+
+.two-button-wrap button:first-child
+  border-right: 2px solid rgb(176, 190, 197)
+
+.lists-wrap
+  max-height: 30rem
+  overflow-y: auto
+  margin-bottom: 1rem
+
+.my-lists-head, .history-head
+  text-align: center
+  text-transform: uppercase
+  font-size: 0.75em
+  letter-spacing: 0.2em
+  color: darkslategrey
+  margin: 1.3rem 0 1rem
+  font-weight: normal
+
+.myList:hover
+  background: rgba(255, 255, 255, 0.35)
+  border-color: #4f9add
+  transition: all 0.5s
+  color: #383838
+
+.myList
+  cursor: pointer
+  margin: 0 1rem 0.5rem
+  font-size: 1.1rem
+  padding: 0.3em 0.35em 0.3em 0.7em
+  border: 1px solid lightgrey
+  border-radius: 0.5em
+  transition: all 0.5s
+
+.my-lists-owner
+  color: #5d5d5d
+
+.my-lists-owner::after
+  content: "/"
+
+.my-lists-role, .my-lists-type
+  float: right
+  color: darkgoldenrod
+  font-size: 0.9em
+  vertical-align: middle
+  display: inline-block
+
+.myList:hover .my-lists-role, .myList:hover .my-lists-type
+  color: #cc950c
+
+.history-remove
+  float: right
+  color: darkred
+  margin-left: 0.5rem
+  margin-top: -0.1rem
+
+.history-remove:hover
+  color: red
+
+.noMyLists, .noHistory, .noUser
+  text-align: center
+  padding: 0 1rem 1rem
+  color: #4b7d58
+  font-size: 1.05rem
+

@@ -1,0 +1,79 @@
+<div class="component-wrap" [class.visible]="listName">
+
+
+  <div class="list-wrap">
+    <div class="list-head">
+      <span *ngIf="!historyBack[0]" class="historyBack history-button"></span>
+      <a *ngIf="historyBack[0]" class="historyBack history-button visible" [href]="listURL(historyBack[0])" (click)="onBackPush($event)">
+        <img [title]="'Back to '+historyBack[0].name" class="btn"
+             src="https://maxcdn.icons8.com/Color/PNG/48/Arrows/left-48.png"></a>
+      <h2  class="list-title"> {{ listTitle }}</h2>
+      <span *ngIf="!historyFront[0]" class="historyFront history-button"></span>
+      <a *ngIf="historyFront[0]" class="historyFront history-button visible" [href]="listURL(historyFront[0])" (click)="onFrontPush($event)">
+        <img [title]="'Forward to '+historyFront[0].name" class="btn"
+          src="https://maxcdn.icons8.com/Color/PNG/48/Arrows/right-48.png"></a>
+    </div>
+    <div class="todo-list"  *ngIf="!permissionDenied" >
+    <ul class="inner-todo-list" [dragula]="'todoes'" [dragulaOptions]="todoesDragOptions">
+      <li *ngFor="let todo of todoes; let index=index; let first=first; let last=last; trackBy: todoTrackBy"
+          class="todo" [ngClass]="{past: isPast(todo.date), future: isFuture(todo.date), today: isToday(todo.date) }"
+          [class.done]="todo.done" [class.draggable]="canReorderTodo()" [attr.todoId]="todo.id" [attr.index]="index">
+        <img *ngIf="todo.done" class="checkbox" [class.btn]="canCheckTodo()" (click)="onUpdate(todo.id, false)" title="Done!" src="https://maxcdn.icons8.com/office/PNG/40/User_Interface/checked_checkbox-40.png">
+        <img *ngIf="!todo.done" class="checkbox" [class.btn]="canCheckTodo()" (click)="onUpdate(todo.id, true)" title="Not yet done..." src="https://maxcdn.icons8.com/ultraviolet/PNG/40/User_Interface/unchecked_checkbox-40.png">
+        <span class="todo-name"> {{ todo.name }} </span>
+        <span class="todo-date" *ngIf="todo.date" >
+          <span *ngIf="canSetTodoDate()" [title]="'Remove date from \''+todo.name+'\''" class="todo-date-remove btn" (click)="onSetDate(todo.id, null)">✘</span>
+          <span class="todo-date-value" [title]="formatDate(todo.date)">
+            <span [innerHTML]="dateDisplay(todo.date)"></span>
+            <!--[title]="'Change date of \''+todo.name+'\''"-->
+            <input *ngIf="canSetTodoDate()"  class="pick-date-input" readonly ngui-datetime-picker
+                   [close-on-select]="false" [default-value]="numberToDate(todo.date)" (valueChanged)="onSetDate(todo.id, $event)">
+          </span>
+        </span>
+        <div class="controls">
+          <!--
+          <span *ngIf="first" class="move-filler"></span>
+          <img title="Move up" *ngIf="!first && canReorderTodo()" class="btn move-up" (click)="onSetIndex(todo.id, index-1)" src="https://png.icons8.com/sort-up/ultraviolet/48/">
+          <span *ngIf="last" class="move-filler"></span>
+          <img title="Move down" *ngIf="!last && canReorderTodo()" class="btn move-down" (click)="onSetIndex(todo.id, index+1)" src="https://png.icons8.com/sort-down/ultraviolet/48/">
+          -->
+          <span class="pick-date" *ngIf="!todo.date && canSetTodoDate()">
+            <img class="btn pick-date-image" alt="pick date" src="https://png.icons8.com/calendar/color/48">
+            <input [title]="'Pick date for \''+todo.name+'\''" class="pick-date-input" readonly ngui-datetime-picker
+                   [close-on-select]="false" [default-value]="numberToDate(todo.date)"  [(ngModel)]="newDate" (popupClosed)="onSetDate(todo.id, newDate)">
+          </span>
+          <img title="{{ 'Delete '+todo.name }}" (click)="onDelete(todo.id)" *ngIf="canDeleteTodo()" class="todo-delete btn" alt="delete" src="https://maxcdn.icons8.com/Color/PNG/48/Industry/trash-48.png">
+        </div>
+      </li>
+    </ul>
+      <div *ngIf="!todoes || todoes.length === 0" class="no-todoes">This Todo List Is Empty…</div>
+      <div class="add-todo" *ngIf="canAddTodo()">
+        <img class="add-todo-here"  title="Add new todo here" src="https://maxcdn.icons8.com/office/PNG/40/Arrows/right3_40-40.png"><input type="text" placeholder="add new item here…" [(ngModel)]="newTodo" (keyup.enter)="onAdd();" class="add-todo-input" title="Add new todo item">
+        <img title="Add" class="btn todo-add" (click)="onAdd();" alt="delete" src="https://maxcdn.icons8.com/Color/PNG/48/Very_Basic/plus-48.png">
+      </div>
+    </div>
+    <div class="share-info" *ngIf="canSharePublicLink()">
+      <img class="link-icon" alt="Link Icon" src="https://maxcdn.icons8.com/Color/PNG/48/Messaging/link-48.png">
+      <input title="Share this link" class="list-link" readonly [value]="SITE_ROOT+listURL(_list)" onfocus="this.select();">
+      <button class="link-copy" title="Click to copy" (click)="onCopyLink()">{{ copied ? 'Copied!' : 'Copy Link' }}</button>
+    </div>
+    <div class="permissionDenied" *ngIf="permissionDenied">
+      Looks like this list is not shared with you…
+    </div>
+    <div class="action-wrap" *ngIf="!showConfirm">
+      <button class="share-list" (click)="showSharer=true;updateMe()" *ngIf="canShareList() && !permissionDenied">Share</button>
+      <span style="display: inline-block"></span>
+      <button class="delete-list" (click)="showConfirm=true; updateMe()" *ngIf="canDeleteList() && !permissionDenied">Delete</button>
+      <button class="leave-list" (click)="showConfirm=true; updateMe()" *ngIf="canLeaveList() && !permissionDenied">Leave this list</button>
+    </div>
+    <div class="confirm" *ngIf="showConfirm">
+      <h4 *ngIf="canDeleteList() && !permissionDenied" class="confirm-head">Really delete <em class="confirm-list-name">{{listName}}</em>?</h4>
+      <h4 *ngIf="canLeaveList() && !permissionDenied" class="confirm-head">Really leave <em class="confirm-list-name">{{listName}}</em>?</h4>
+      <button (click)="showConfirm=false; updateMe()" class="no">Cancel</button>
+      <button (click)="onDeleteListConfirm()" *ngIf="canDeleteList() && !permissionDenied" class="yes">Delete</button>
+      <button (click)="onLeaveListConfirm()" *ngIf="canLeaveList() && !permissionDenied" class="yes">Leave</button>
+    </div>
+  </div>
+
+  <app-list-sharer [list]="_list" [visible]="showSharer"  (onDialogClose)="showSharer=false;updateMe()"></app-list-sharer>
+</div>

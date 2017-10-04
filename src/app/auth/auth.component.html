@@ -1,0 +1,71 @@
+<div class="auth-wrap">
+  <div class="auth-buttons">
+    <span *ngIf="!user">
+      <button class="login" (click)="setPanelState(PanelState.LOGIN)">Login</button>
+      <span style="display: inline-block"></span>
+      <button class="register" (click)="setPanelState(PanelState.REGISTER)">Register</button>
+    </span>
+    <span *ngIf="user">
+      <span class="username-holder">{{ user.username }}</span>
+      <button class="log-out" (click)="onLogOut()">Log out</button>
+    </span>
+  </div>
+  <div class="auth-panel"
+       [style.display]="panelState != PanelState.HIDDEN ? 'block' : 'none'">
+    <div class="auth-dialog" [class.registerState]="panelState==PanelState.REGISTER" [class.loginState]="panelState==PanelState.LOGIN" [class.waiting]="waiting">
+      <div class="auth-dialog-head">
+        <h3 *ngIf="panelState==PanelState.LOGIN" class="auth-dialog-heading">LOGIN</h3>
+        <h3 *ngIf="panelState==PanelState.REGISTER" class="auth-dialog-heading">REGISTER</h3>
+        <img (click)="setPanelState(PanelState.HIDDEN)" class="btn close" title="Close" src="https://maxcdn.icons8.com/Color/PNG/48/User_Interface/delete_sign-48.png">
+      </div>
+      <div *ngIf="panelState==PanelState.LOGIN">
+        <div class="social-login">
+          <span class="social-register-head">LOGIN WITH</span>
+          <img (click)="onProviderLogin('facebook')" class="btn" src="https://maxcdn.icons8.com/rsl/PNG/64/Logos/facebook-64.png" title="Facebook" width="40" height="40"><img
+          (click)="onProviderLogin('gplus')" class="btn" src="https://maxcdn.icons8.com/rsl/PNG/64/Logos/google_plus-64.png" title="Google Plus" width="40" height="40">
+        </div>
+        <div class="disjunctor"><span class="line" style="width: 5rem"></span> OR <span class="line" style="width: 5rem"></span></div>
+        <div class="email-login">
+          <fieldset>
+            <label>Email</label> <input [(ngModel)]="typedEmail" type="email" title="email">
+          </fieldset>
+          <fieldset>
+            <label>Password</label> <input [(ngModel)]="typedPassword" type="password" title="password">
+          </fieldset>
+          <div *ngIf="error" [class.visible]="error" class="error">{{ error }}</div>
+          <button (click)="onPasswordLogin()" class="btn">Login with Email</button>
+        </div>
+      </div>
+      <div *ngIf="panelState==PanelState.REGISTER">
+        <fieldset>
+          <label style="display: initial;font-weight: bold;color: rgba(47, 79, 79, 0.9);">Username</label>
+          <span class="req-star" style="vertical-align: text-top">*</span><span class="req-star">(required)</span>
+          <input [(ngModel)]="typedUsername" type="text" title="username" (keyup)="validate()">
+        </fieldset>
+
+        <div  [class.visible]="error" class="error">{{ error }}</div>
+
+        <div class="social-register">
+          <span class="social-register-head">REGISTER WITH</span>
+          <img (click)="onProviderRegister('facebook')" class="btn" src="https://maxcdn.icons8.com/rsl/PNG/64/Logos/facebook-64.png" title="Facebook" width="40" height="40"><img
+            (click)="onProviderRegister('gplus')" class="btn" src="https://maxcdn.icons8.com/rsl/PNG/64/Logos/google_plus-64.png" title="Google Plus" width="40" height="40">
+        </div>
+        <div class="disjunctor"><span class="line" style="width: 5rem"></span> OR <span class="line" style="width: 5rem"></span></div>
+        <div class="email-register">
+          <fieldset>
+            <label>Email</label> <input [(ngModel)]="typedEmail" type="email" title="email">
+          </fieldset>
+          <fieldset>
+            <label>Password</label> <input [(ngModel)]="typedPassword" type="password" title="password">
+          </fieldset>
+          <fieldset>
+            <label>Repeat password</label> <input [(ngModel)]="repeatPassword" type="password" title="password">
+          </fieldset>
+          <div  [class.visible]="emailError" class="error">{{ emailError }}</div>
+          <button (click)="onPasswordRegister()" class="btn">Register with Email</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

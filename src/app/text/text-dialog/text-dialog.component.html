@@ -1,0 +1,19 @@
+<div class="wrap" [class.visible]="_visible">
+  <div class="dialog">
+    <div class="head">
+      <h3 *ngIf="_head" class="heading" [innerHTML]="_trust ? headSafe : _head"></h3>
+      <h3 *ngIf="!_head" class="heading">
+        <ng-content select="[data-head]"></ng-content>
+      </h3>
+      <img class="btn close" title="Close" (click)="onClose()" src="https://maxcdn.icons8.com/Color/PNG/48/User_Interface/delete_sign-48.png"/>
+    </div>
+    <div *ngIf="_content" class="content" [innerHTML]="_trust ? contentSafe : _content"></div>
+    <div *ngIf="!_content" class="content" >
+      <ng-content select="[data-content]"></ng-content>
+    </div>
+    <div class="action-wrap">
+      <button class="button-close" (click)="onClose()">CLOSE</button>
+    </div>
+  </div>
+
+</div>

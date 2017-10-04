@@ -1,0 +1,33 @@
+<div class="component-wrap">
+  <div class="must-verify" *ngIf="mustVerify">
+    Please check your inbox to verify your email.
+    <div class="resendWrap" *ngIf="!hideResend">
+      <span (click)="onResend()" class="resend" title="Click here to resend confirmation email.">Resend Email</span>
+    </div>
+  </div>
+  <div class="verify-success" *ngIf="verifySuccess" (click)="verifySuccess=false">
+    Your email has been verified!
+  </div>
+  <div class="reset-password" *ngIf="resetPassword">
+    <label>New Password</label>
+    <input/>
+  </div>
+  <div class="confirm-dialog-wrap pick-username" *ngIf="noUsernameUser">
+    <div class="confirm-dialog" [class.waiting]="usernameWaiting">
+      <div class="question">
+        <span class="question-inner">Looks like your username was not set. Please select a username now.</span>
+      </div>
+      <fieldset class="username-select">
+        <label>Username</label>
+        <input [(ngModel)]="typedUsername" type="text" title="username" (keyup)="validate()" placeholder="my-awesome-username">
+        <div  [class.visible]="usernameError" class="error">{{ usernameError }}</div>
+      </fieldset>
+      <div class="action-wrap">
+        <button (click)="onPickUsername()" class="yes btn">Okay!</button>
+        <button (click)="onLogOut()" class="no btn">Log out</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="error" *ngIf="error">{{ error }}</div>
+</div>

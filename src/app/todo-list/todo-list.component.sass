@@ -1,0 +1,350 @@
+@import "../common"
+
+.component-wrap
+  margin: auto
+  max-width: 0
+  visibility: hidden
+  //display: none
+  opacity: 0
+  margin-bottom: 3rem
+
+
+.component-wrap.visible
+  max-width: 35rem
+  //display: block
+  visibility: visible
+  opacity: 1
+  transition: opacity 1s, max-width 1s
+  transition-delay: 0.4s
+
+  @media all and (max-width: 70rem)
+    max-width: initial
+    margin-right: 1rem
+
+  @media all and (max-width: 60rem)
+    max-width: 35rem
+    margin-left: auto
+    margin-right: auto
+
+  @media all and (max-width: 37rem)
+    max-width: initial
+    margin-left: 0.5rem
+    margin-right: 0.5rem
+
+.component-wrap input
+  background: transparent
+
+.list-wrap
+  //min-height: 20rem
+  border: #546E7A 2px solid
+  //overflow: hidden
+  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem
+  background-color: var(--main-background)
+  display: none
+
+.component-wrap.visible .list-wrap
+  display: block
+
+.list-head
+  display: flex
+  flex-direction: row
+
+.historyBack
+  margin: 0.6rem 0 0 0.5rem
+
+.historyFront
+  margin: 0.6rem 0.5rem 0 0
+
+.history-button
+  opacity: 0
+  transition: opacity 0.3s
+  width: 48px
+  height: 48px
+
+.history-button.visible
+  opacity: 1
+  transition: opacity 0.8s
+
+.history-button .btn
+  width: 100%
+  height: 100%
+
+.list-title
+  text-align: center
+  color: #425660
+  margin-bottom: 0
+  font-size: 2rem
+  margin-top: 0.5em
+  font-weight: normal
+  flex: auto
+
+.todo-list
+  list-style: none
+  padding: 2rem
+  margin: 0
+  visibility: hidden
+  opacity: 0
+
+.component-wrap.visible .todo-list
+  visibility: visible
+  opacity: 1
+  transition: visibility 0.2s, opacity 0.2s
+  transition-delay: 1s
+
+.inner-todo-list
+  margin: 0
+  padding: 0
+
+.todo
+  margin-bottom: 0.8em
+  font-size: 1.3rem
+  border-bottom: solid lightgray 1px
+  padding-bottom: 0.3em
+  color: #455A64
+  display: flex
+  flex-direction: row
+
+.todo.draggable
+  cursor: move /* fallback if grab cursor is unsupported */
+  cursor: grab
+  cursor: -moz-grab
+  cursor: -webkit-grab
+  touch-action: none
+
+.gu-mirror.todo
+  cursor: grabbing
+  cursor: -moz-grabbing
+  cursor: -webkit-grabbing
+
+//.todo::after
+//  content: " "
+//  display: block
+//  border-bottom: solid rgb(211, 211, 211) 1px
+//  padding-top: 0.3em
+
+.todo > *
+  vertical-align: middle
+
+.checkbox, .add-todo-here
+  width: 1.5em
+  height: 1.5em
+
+.todo-name
+  font-size: 1.2em
+  margin-left: 0.5rem
+  flex: auto
+  max-width: calc(100% - 4.5rem)
+  word-wrap: break-word
+
+.controls
+  font-size: 0
+
+.controls > *
+  font-size: 1.3rem
+
+.todo-delete.btn
+  width: 1.5em
+  height: 1.5em
+  vertical-align: middle
+  //margin-left: 0.4rem
+  //float: right
+
+.todo-date
+  color: dimgray
+  font-style: oblique
+  font-size: 1rem
+  display: inline
+  padding-top: 0.4rem
+  margin-right: 0.3rem
+  text-align: right
+
+//.done .todo-date
+//  opacity: 0.4
+
+.done .todo-date
+  color: #cdcccb !important
+
+.past .todo-date
+  color: darkred
+
+//.date-inner.future
+//  color: seagreen
+
+.today .todo-date
+  //color: blueviolet
+  //color: seagreen
+  color: #3f51b5
+
+.todo-date-value
+  position: relative
+
+.todo-date-remove
+  margin-right: -0.1em
+  opacity: 0.8
+  font-size: 0.9em
+
+.todo-date-remove:hover
+  color: red
+
+.pick-date
+  vertical-align: middle
+  display: inline-block
+  position: relative
+  width: 1.4em
+  height: 1.4em
+  margin-top: 0.1rem
+
+.pick-date-image
+  position: absolute
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+
+
+
+.pick-date-input
+  opacity: 0
+  position: absolute
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  cursor: pointer
+
+.move-filler, .move-up.btn, .move-down.btn
+  display: inline-block
+  width: 1.1em
+  height: 1.1em
+  vertical-align: middle
+
+.no-todoes
+  text-align: center
+  font-size: 1.4rem
+  margin-bottom: 1em
+  font-style: italic
+  color: #795548
+
+
+.add-todo
+  font-size: 1.3rem
+  color: #455A64
+  display: flex
+  flex-direction: row
+
+.add-todo > *
+  vertical-align: middle
+
+.add-todo-here
+  padding-left: 0.3em
+
+
+.add-todo-input
+  margin-left: 0.3em
+  margin-right: 0.4rem
+  max-width: calc(100% - 4em)
+  font-size: 0.9em
+  color: inherit
+  padding: 0.1em 0.3em
+  border: none
+  border-bottom: 1px solid #9E9E9E
+  flex: auto
+
+  @media all and (max-width: 37rem)
+    width: calc(100% - 15rem)
+
+.todo-add.btn
+  width: 1.5rem
+  height: 1.5rem
+
+.share-info
+  padding: 0 2rem
+  text-align: center
+
+.share-info > *
+  vertical-align: middle
+
+.link-icon
+  width: 2.5em
+  height: 2.5em
+
+.list-link
+  border: none
+  width: 21em
+  text-align: center
+  border-bottom: 2px double dimgray
+  margin-right: 0.1rem
+  text-overflow: fade
+  text-overflow: '➟'
+
+  @media all and (max-width: 37rem)
+    width: 100%
+
+.link-copy
+  border: none
+  padding: 0
+  font-weight: bold
+  background: none
+
+.link-copy:hover
+  color: darkslateblue
+
+.action-wrap
+  text-align: center
+  padding: 1rem
+  visibility: hidden
+  opacity: 0
+
+.share-list
+  @include main-button()
+
+.delete-list, .leave-list
+  @include main-button($backHover: #d15f39)
+
+.component-wrap.visible .action-wrap
+  visibility: visible
+  opacity: 1
+  transition: visibility 0.2s, opacity 0.2s
+  transition-delay: 1s
+
+.confirm
+  text-align: center
+  padding: 1rem
+
+  button.no
+    background: #788186
+    border: 1px solid #727272
+
+  button.yes
+    background: #c9302c
+    border: 1px solid #ac2925
+
+  button:first-of-type
+    margin-right: 0.5rem
+
+  button
+    font-size: 1rem
+    border-radius: 0.4em
+    border: none
+    padding: 0.3em 0.75em
+    color: white
+    cursor: pointer
+
+  button:hover
+    opacity: 0.9
+
+.confirm-head
+  color: darkslategray
+  font-size: 1.2rem
+  letter-spacing: 0.05em
+  margin: 0 0 1rem
+
+.confirm-list-name
+  font-weight: normal
+
+.permissionDenied
+  text-align: center
+  margin: 2rem 1rem 1rem
+  font-size: 1.2rem
+  color: rgba(180, 52, 74, 0.84)
+  font-weight: bold

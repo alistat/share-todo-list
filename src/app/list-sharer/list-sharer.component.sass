@@ -1,0 +1,211 @@
+@import "../common"
+
+.component-wrap
+  display: none
+
+.component-wrap.visible
+  display: block
+
+.component-wrap::before
+  @include overlay()
+
+.share-dialog
+  width: 30rem
+  position: fixed
+  top: 40%
+  transform: translateX(-50%) translateY(-50%)
+  left: 50%
+  background: rgba(255, 255, 255, 0.92)
+  z-index: 10
+  border-radius: 0.3rem
+  overflow: auto
+
+  @media all and (max-width: 32rem) and (min-height: 23rem)
+    width: calc(100% - 2rem)
+    left: 1rem
+    transform: translateY(-50%)
+
+
+  @media all and (max-height: 23rem) and (min-width: 32rem)
+    height: calc(100% - 2rem)
+    top: 1rem
+    transform: translateX(-50%)
+
+  @media all and (max-height: 23rem) and (max-width: 32rem)
+    height: calc(100% - 2rem)
+    top: 1rem
+    transform: none
+    width: calc(100% - 2rem)
+    left: 1rem
+
+
+.head
+  text-align: center
+  margin: 0
+  padding: 1.1rem 0 1.5rem
+  font-size: 1.8rem
+  color: dimgrey
+
+.share-list
+  padding: 0.9rem 1.4rem 1rem
+
+.share
+  margin-bottom: 1.4rem
+
+.share > *
+  vertical-align: middle
+
+.user
+  font-size: 1.3rem
+
+.roles
+  float: right
+  font-size: 1.05rem
+
+.role-wrap
+  vertical-align: middle
+  margin: 0
+  padding: 0
+  display: inline-grid
+
+.role
+  text-align: center
+  border: 1px solid gainsboro
+  padding: 0.1em 0.3em
+  color: #363d4a
+  transition: color 0.3s
+
+.role:hover
+  color: #3367c6
+  transition: color 0.3s
+
+.role.selected
+  background: cornflowerblue
+  color: white
+  border: 1px solid #5f87d1
+  font-size: 1.1em
+  box-shadow: 0 0 3px 1px lightgray
+
+.remove-share
+  float: right
+  width: 1.6rem
+  margin-left: 0.75rem
+
+.newShare
+  margin: 2.5rem 1rem 0
+  background: white
+  border-radius: 0.5rem
+  border: 1px solid lightsteelblue
+  display: flex
+  flex-direction: row
+
+.newShare > *
+  vertical-align: middle
+
+.newShareLabel
+  padding: 0.5em 0 0.5em 0.5em
+  display: inline-block
+
+.newShareInput
+  max-width: 12em
+  border: none
+  background: transparent
+  display: inline-block
+  font-size: 1.1em
+
+  @media all and (max-width: 30rem)
+    width: calc(100% - 0.1rem)
+
+
+.share-button
+  border: none
+  text-align: center
+  background: #60a173
+  color: white
+  cursor: pointer
+  margin-left: 0.5rem
+  transition: background 0.5s
+  padding: 0.5em 0.5em
+  display: inline-block
+  border-radius: 0 0.5rem 0.5rem 0
+  margin-top: -1px
+
+.share-button:hover
+  background: #2a926d
+  transition: all 0.5s
+
+//.public-share
+  //padding: 0.9rem 1.4rem 1rem
+
+.public-share-head
+  font-size: 1.3rem
+  color: darkblue
+
+.public-share > *
+  vertical-align: middle
+  display: inline-block
+
+.error
+  margin: 0 2rem
+  color: darkred
+  padding-left: 0.7em
+  border-left: 0.4em solid
+
+.action-wrap
+  text-align: center
+  padding: 1rem
+
+.close
+  @include main-button($backHover: #d15f39)
+
+.confirm-dialog-wrap
+  display: none
+
+.confirm-dialog-wrap.visible
+  display: block
+
+.confirm-dialog-wrap::before
+  @include overlay(15, linear-gradient(to bottom, #ef473a, #cb2d3e))
+  opacity: 0.3
+  //background: #cb2d3e;  /* fallback for old browsers */
+  //background: -webkit-linear-gradient(to bottom, #ef473a, #cb2d3e);  /* Chrome 10-25, Safari 5.1-6 */
+  //background: ; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+.confirm-dialog
+  position: fixed
+  z-index: 20
+  background: white
+  //padding: 1rem 1rem 0
+  padding: 1.5rem 2rem 1rem
+  //border-radius: 0.5rem
+  top: 40%
+  left: 50%
+  transform: translateX(-50%) translateY(-50%)
+  border: 2px solid dimgray
+  font-size: 1.1rem
+
+  .action-wrap
+    padding: 1.5rem 0 0
+
+  button.no
+    background: #788186
+
+  button.yes
+    background: #d63300
+
+  button:first-child
+    margin-right: 0.5rem
+
+  button
+    font-size: 1rem
+    border-radius: 0.1rem
+    border: none
+    padding: 0.3em 0.6em
+    color: white
+
+  button:hover
+    opacity: 0.9
+
+
+

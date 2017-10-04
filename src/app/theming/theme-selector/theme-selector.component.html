@@ -1,0 +1,7 @@
+<div>
+  <label class="mainLabel">Theme:</label>
+  <select [(ngModel)]="selected" (change)="onChange()">
+    <option *ngIf="false && !selected" [value]="null">{{ '' }}</option>
+    <option *ngFor="let theme of themes" [value]="theme">{{ theme }}</option>
+  </select>
+</div>
