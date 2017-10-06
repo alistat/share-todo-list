@@ -3,7 +3,18 @@
 Manage your todo lists and share them with your friends and colleagues!
 
 
+Features
+* Live collaborate with others
+* Public (guest) and private lists
+* Sharable links
+* Select access level for the lists you share to others (read, check only, edit, admin)
+* Set time for todo items and see time remaining to complete them
+* Multiple themes
+* Facebook, Google+ and Email login methods
 
+
+[Live Deployment](https://sharetodolist.eu/)<br>
+[More info](https://alistat.eu/webapp/share-todo-list) 
 
 
 #### Config
