@@ -1,4 +1,4 @@
-# Todoes
+# Share Todo List
 
 Manage your todo lists and share them with your friends and colleagues!
 
