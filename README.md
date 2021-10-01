@@ -13,10 +13,6 @@ Features
 * Facebook, Google+ and Email login methods
 
 
-[Live Deployment](https://sharetodolist.eu/)<br>
-[More info](https://alistat.eu/webapp/share-todo-list) 
-
-
 #### Config
 This app is built with Angular 4, Angular CLI and Firebase as the backend service.
 It requires a Firebase & services config file at src/assets/scripts/services-config.js
